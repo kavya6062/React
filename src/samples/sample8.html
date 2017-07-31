@@ -1,0 +1,67 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="container6" ></div>
+	 <div id="container1" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+			 class Clock extends React.Component {
+			  constructor(props) {
+				super(props);
+				this.state = {date: new Date()}; 
+				this.stopClock = this.stopClock.bind(this);
+				this.startClock = this.startClock.bind(this);
+			  }
+			  componentWillMount () {
+			     console.log(1);
+			  }
+			  componentDidMount() {
+				this.timerID = setInterval(
+				  () => this.tick(),
+				  1000
+				);
+			  }
+			  componentWillUnmount() {
+				clearInterval(this.timerID);
+			  }
+			  stopClock() {
+				clearInterval(this.timerID);
+			  }
+			  startClock() {
+				this.timerID = setInterval(
+				  () => this.tick(),
+				  1000
+				);
+			  }
+			  tick() {
+				this.setState({
+				  date: new Date()
+				});
+			  }
+
+			  render() {
+				return (
+				  <div>
+					<h1>Hello, world!</h1>
+					<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+					<button onClick={this.stopClock}  >Stop Clock</button>
+					<button onClick={this.startClock}  >Start Clock</button>
+				  </div>
+				);
+			  }
+			}
+			
+		ReactDOM.render(
+		  <Clock />,
+		  document.getElementById('container6')
+		);
+	  </script>
+  </body>
+</html>
+

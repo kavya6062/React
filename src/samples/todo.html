@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<title>ReactJS</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js" ></script>
+		<script src="https://npmcdn.com/react@15.3.1/dist/react-with-addons.js" ></script>
+		<script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js" ></script>
+		<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+	</head>
+	<body>
+	<div id="container1" ></div>
+	
+	<script type="text/babel">
+			var TodoList = React.createClass({
+			  render: function() {
+				var createItem = function(item) {
+				  return <li key={item.id}>{item.text}</li>;
+				};
+				return <ul>{this.props.items.map(createItem)}</ul>;
+			  }
+			});
+			
+			
+			var TodoApp = React.createClass({
+			  getInitialState: function() {
+				this.getServerData();
+				return {items: [], text: ''};
+			  },
+			  getServerData:function(){
+				var jqxhr = $.ajax( "data.json" )
+				  .done(function(data) {
+					var nextItems = this.state.items.concat(data);
+					var nextText = '';
+					this.setState({items: nextItems, text: nextText});
+				  }.bind(this))
+				  
+			  },
+			  taskChanged: function(e) {
+				this.setState({text: e.target.value});
+			  },
+			  handleSubmit: function(e) {
+				e.preventDefault();
+				var nextItems = this.state.items.concat([{text: this.state.text, id: Date.now()}]);
+				var nextText = '';
+				this.setState({items: nextItems, text: nextText});
+			  },
+			  render: function() {
+				return (
+				  <div>
+					<h3>TODO</h3>
+					<TodoList items={this.state.items} />
+					<form onSubmit={this.handleSubmit}>
+					  <input onChange={this.taskChanged} value={this.state.text} />
+					  <button>{'Add #' + (this.state.items.length + 1)}</button>
+					</form>
+				  </div>
+				);
+			  }
+			});
+			
+			
+			ReactDOM.render(<TodoApp />, document.getElementById("container1"));
+	 </script>	
+	</body>
+</html>

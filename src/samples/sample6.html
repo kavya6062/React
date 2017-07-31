@@ -1,0 +1,59 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="container6" ></div>
+	 <div id="container1" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+			 class Welcome extends React.Component {
+			  constructor(props) {
+				super(props);
+				 this.state = {name:props.name};   //  this.state = {name:"Jagadeesh"}
+				 this.updateName = this.updateName.bind(this);
+			  }
+			  updateName(val){
+			     this.setState({name:val});
+			  }
+			  render() {
+			  return (
+				  <div>
+					<h2>Welcome to ES6 With react JS {this.state.name}.</h2>
+					<Name  value={this.state.name} changeM={this.updateName}/>
+				  </div>
+				);
+			  }
+			}
+			
+			class Name extends React.Component {
+			  constructor(props) {
+				super(props);
+				 this.state = {value:props.value};  //  this.state = {value:"Jagadeesh"}
+				 this.valueChanged = this.valueChanged.bind(this);
+			  }
+			  valueChanged(evt){
+			       this.setState({value:evt.target.value});
+				   this.props.changeM(evt.target.value);
+			  }
+			  render() {
+			  return (
+				  <div>
+					<h2>This is inside the Name tag {this.state.value}.</h2>
+					<input  type="text"  value={this.state.value}  onChange={this.valueChanged} />
+				  </div>
+				);
+			  }
+			}
+	 
+		ReactDOM.render(
+		  <Welcome name="Jagadeesh" />,
+		  document.getElementById('container6')
+		);
+	  </script>
+  </body>
+</html>

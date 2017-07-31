@@ -1,0 +1,75 @@
+<html>
+  <head>
+	<title>React JS training</title>
+	<style>
+	   #main{
+	      border:1px solid red;
+		  margin:20px;
+		  padding:10px;
+		  
+	   }
+	   
+	   #main1{
+	      border:1px solid red;
+		  margin:20px;
+		  padding:10px;
+		  
+	   }
+
+	   #main2{
+	      border:1px solid red;
+		  margin:20px;
+		  padding:10px;
+		  
+	   }
+	   
+	   .cls_child_container{
+	      border:1px solid green;
+		  margin:10px;
+		  padding:10px;
+	   }
+	</style>
+  </head>
+  <body   >
+	  <div id="main" ></div>
+	  <div id="main1" ></div>
+	  <div id="main2" ></div>
+     <script src="libs/browser.js"  ></script>
+     <script src="libs/react.js"  ></script>
+	 <script src="libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel"    >
+		  function createForm(){
+		     var mainContainer=document.getElementById("main");
+			 
+			 var childContainer=document.createElement("div");
+			 childContainer.className="cls_child_container";
+			 mainContainer.appendChild(childContainer);
+			 var textBox=document.createElement("input");
+			 textBox.type="text";
+			 childContainer.appendChild(textBox);
+			 textBox.value="Default Text";
+		  }
+		  
+		  function createReactForm(){
+			  var textBox = React.createElement("input",{type:"text", defaultValue:"Default Text"});
+		      var childContainer1 = React.createElement("div",{className:"cls_child_container"},textBox);
+			  ReactDOM.render(childContainer1,document.getElementById("main1"));
+		  }
+		  
+		    
+		  function createReactFormBabel(){
+		      ReactDOM.render(
+				   <div className="cls_child_container" >
+						<input type="text" defaultValue="Default text"  />
+				   </div>,document.getElementById('main2'));
+		  }
+		  function onLoad(){
+			createForm();
+			createReactForm();
+			createReactFormBabel();
+		 }
+		 onLoad();
+	  </script>
+  </body>
+</html>

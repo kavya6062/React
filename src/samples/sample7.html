@@ -1,0 +1,54 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="container6" ></div>
+	 <div id="container1" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+			 class Search extends React.Component {
+			  constructor(props) {
+				super(props);
+				 this.state = {
+								searchStr:"",
+								searchList:[{name:"Bangalore"},{name:"Delhi"},{name:"Hydrabad"}], 
+								showList:[]
+							};   
+				 
+				 this.searchCity = this.searchCity.bind(this);
+			  }
+			  searchCity(event){
+			     this.setState({searchStr:event.target.value});
+				 var searchResult = this.state.searchList.filter(function(searchObj){
+								       if(searchObj.name.toLowerCase().indexOf(event.target.value.toLowerCase()) != -1){
+									      return true
+									   }
+									}.bind(this)).map(function(searchObj){
+										return <li key={searchObj.name} >{searchObj.name}</li>
+									});
+				this.setState({showList:searchResult});
+			  }
+			  render() {
+			  return (
+				  <div>
+					<input type="text" value={this.state.searchStr}  onChange={this.searchCity}  />
+					<ul>
+						{this.state.showList}
+					</ul>
+				  </div>
+				);
+			  }
+			}			 
+		
+		ReactDOM.render(
+		  <Search />,
+		  document.getElementById('container6')
+		);
+	  </script>
+  </body>
+</html>

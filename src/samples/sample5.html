@@ -1,0 +1,50 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="container6" ></div>
+	 <div id="container1" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+	         class HelloWorld extends React.Component {
+			  constructor(props) {
+				super(props);
+				this.state = {name:props.name};  
+			  }
+			  componentWillMount () {
+			     console.log("Inside componentWillMount  -> 1")
+			  }
+			  componentDidMount() {
+				console.log("Inside componentDidMount  -> 2")
+			  }
+			  
+			  componentWillUnmount() {
+				console.log("Inside componentWillUnmount  -> 3")
+			  }
+
+			  render() {
+			  return (
+				  <div>
+					<h2>Welcome to ES6 With react JS {this.state.name}.</h2>
+				  </div>
+				);
+			  }
+			}
+			
+		ReactDOM.render(
+		  <HelloWorld name="Jagadeesh" />,
+		  document.getElementById('container6')
+		);
+		
+		ReactDOM.render(
+		  <HelloWorld  name="Jagadeesh" />,
+		  document.getElementById('container1')
+		);
+	  </script>
+  </body>
+</html>

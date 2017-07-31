@@ -1,0 +1,56 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="main" ></div>
+	 <div id="container1" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+		  function loadView(){
+		      ReactDOM.render(<div>
+				<Welcome fname="Jagadeesh"   lastName="Venkateshappa" />
+			  </div>,document.getElementById('main'));
+		  }
+		  
+		  function onLoad(){
+				loadView();
+		  }
+		  
+		  
+		var Welcome = React.createClass({
+				getInitialState: function(){
+				   return {fname: this.props.fname  , lastName: this.props.lastName }
+			    },
+			    render: function(){
+					return (
+						<div >
+							<Name  fullName={this.state.fname + " " + this.state.lastName} />
+						</div>
+				);
+			  }
+		});		
+		
+		var Name = React.createClass({
+				getInitialState: function(){
+				   return {fullName: this.props.fullName}
+			    },
+			    render: function(){
+					return (<span>Full Name : {this.state.fullName}</span>
+				);
+			  }
+		});
+		  
+		  
+		 
+		  
+		  
+		 
+		  onLoad();
+	  </script>
+  </body>
+</html>

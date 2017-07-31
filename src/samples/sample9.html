@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<script src="../libs/browser.js"  ></script>
+		<script src="../libs/react.js"  ></script>
+		<script src="../libs/react-dom.js"  ></script>
+	  <style>
+	  .menu{
+	    list-style-type: none; 
+		border:2px solid #cacaca;
+		padding:10px;
+		display:inline-block;
+		width:250px;
+	  }	
+	  
+	  .menu  li{
+	     border: 1px solid orange;
+		 padding:4px;
+		 cursor:pointer;
+	  }
+	  .mouseOver{
+	     background-color:#cacaca;
+	  }
+	  </style>
+	</head>
+	<body>
+		<div  id="main" ></div>
+		
+		
+		<script type="text/babel"    >
+		
+		  class MyImage extends React.Component {
+			  constructor(props){
+				super(props)
+				this.state = {imgSrc:"", imgShow:<img src="default.jpg" />}; 
+				this.valueChanged=this.valueChanged.bind(this);
+			 }
+			 valueChanged(event){
+				this.setState({imgSrc:event.target.value})
+				if(event.target.value=="bird"){
+					this.setState({imgShow:<img src="bird.jpg" /> })
+				}else{
+						this.setState({imgShow:<img src="default.jpg" /> })
+				}
+				
+			 }
+			  render() {
+				return (
+					<div>
+						<div><input type="text"  value={this.state.imgSrc} onChange={this.valueChanged} /></div>
+						<div>
+							{this.state.imgShow}
+						</div>
+					</div>
+				);
+			  }
+			}
+		
+		
+			class MyImage1 extends React.Component {
+			  constructor(props){
+				super(props)
+				this.state = {imgSrc:"", imgShow:<img src="default.jpg"  />}; 
+				this.imgSrcChanged=this.imgSrcChanged.bind(this);
+			 }
+			 imgSrcChanged(evt){
+				this.setState({imgSrc:evt.target.value});
+				if(evt.target.value ==="bird"){
+					this.setState({imgShow:<img src="bird.jpg"  />})
+				}else{
+					this.setState({imgShow:<img src="default.jpg"  />})
+				}
+			 }
+			  render() {
+				return (
+					<div>
+						<div>
+							<input type="text"  value={this.state.imgSrc}  onChange={this.imgSrcChanged}  />
+						</div>
+						<div>
+							{this.state.imgShow}
+						</div>
+					</div>
+				);
+			  }
+			}
+			ReactDOM.render(<MyImage   />,document.getElementById("main"));
+		</script>
+			
+	</body>
+</html>

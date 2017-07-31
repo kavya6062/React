@@ -1,0 +1,39 @@
+<html>
+  <head>
+	<title>Sample Component</title>
+  </head>
+  <body   >
+	 <div id="container2" ></div>
+     
+	 <script src="../libs/browser.js"  ></script>
+     <script src="../libs/react.js"  ></script>
+	 <script src="../libs/react-dom.js"  ></script>
+	 
+	 <script type="text/babel">
+	    const user = {
+		  firstName: 'Jason',
+		  lastName: 'Vale'
+		};
+		
+		function formatName(user) {
+		  return user.firstName + ' ' + user.lastName;
+		}
+
+		
+		const element = (
+		  <h1>
+			Hello, {formatName(user)}!
+		  </h1>
+		);
+		
+		
+       
+		ReactDOM.render(
+		  <h1>
+			Hello, {formatName(user)}!  
+		  </h1>,
+		  document.getElementById('container2')
+		);
+	  </script>
+  </body>
+</html>
